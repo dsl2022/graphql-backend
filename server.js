@@ -21,6 +21,9 @@ const resolvers = {
   Query: {  
     customers:()=>{
     return customers
+  },
+  customer:(_,query)=>{
+    console.log(query)
   }
 },
   // Mutation: {
@@ -44,7 +47,8 @@ const server = new ApolloServer({
       email:String!
     }
     type Query {    
-     customers:[Customer]!     
+     customers:[Customer]!
+     customer(id:ID!):Customer!  
     }
     `,
     resolvers,
