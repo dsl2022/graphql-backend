@@ -18,56 +18,30 @@ const customers = [
 
 // Define the resolvers for our GraphQL server
 const resolvers = {
-  Query: {
-    customers: () => customers,
-    customer: (_, { id }) => customers.find(customer => customer.id === id),
-  },
-  Mutation: {
-    addCustomer: (_, { name, email, phone }) => {
-      const newCustomer = { id: String(customers.length + 1), name, email, phone };
-      customers.push(newCustomer);
-      return newCustomer;
-    },
-    updateCustomer: (_, { id, name, email, phone }) => {
-      const customerIndex = customers.findIndex(customer => customer.id === id);
-      if (customerIndex === -1) {
-        throw new Error(`Customer with ID ${id} not found`);
-      }
-      const updatedCustomer = { ...customers[customerIndex], name, email, phone };
-      customers[customerIndex] = updatedCustomer;
-      return updatedCustomer;
-    },
-    deleteCustomer: (_, { id }) => {
-      const customerIndex = customers.findIndex(customer => customer.id === id);
-      if (customerIndex === -1) {
-        throw new Error(`Customer with ID ${id} not found`);
-      }
-      const deletedCustomer = customers.splice(customerIndex, 1)[0];
-      return deletedCustomer;
-    },
-  },
+  Query: {  
+    hello:()=>{
+    return 'hello world!'
+  }
+},
+  // Mutation: {
+  
+  //   addCustomer: () => {      
+  //   },
+  //   updateCustomer: () => {      
+  //   },
+  //   deleteCustomer: () => {      
+  //   },
+  // },
 };
 
 // Create a new Apollo server instance with our schema and resolvers
 const server = new ApolloServer({
     typeDefs: gql`
-      type Customer {
-        id: ID!
-        name: String!
-        email: String!
-        phone: String!
-      }
-  
-      type Query {
-        customers: [Customer!]!
-        customer(id: ID!): Customer
-      }
-  
-      type Mutation {
-        addCustomer(name: String!, email: String!, phone: String!): Customer!
-        updateCustomer(id: ID!, name: String, email: String, phone: String): Customer!
-        deleteCustomer(id: ID!): Customer!
-      }
+    type Query {
+     hello:String!
+     hello2:String
+     hello3:[String]!
+    }
     `,
     resolvers,
   });
