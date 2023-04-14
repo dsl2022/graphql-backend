@@ -20,6 +20,7 @@ const customers = [
 const resolvers = {
   Query: {  
     customers:()=>{
+      console.log(customers)
     return customers
   },
   customer:(_,{id})=>{
@@ -32,8 +33,10 @@ const resolvers = {
 },
   Mutation: {
   
-    addCustomer: () => {    
-        
+    addCustomer: (_,{name,email, phone}) => {    
+      const newCustomer = { id: String(customers.length + 1), name, email, phone };
+      customers.push(newCustomer);
+      return newCustomer;
     },
     // updateCustomer: () => {      
     // },
