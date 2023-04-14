@@ -21,7 +21,14 @@ const resolvers = {
   Query: {  
     hello:()=>{
     return 'hello world!'
+  },
+  hello2:()=>{
+    return JSON.stringify({foo:"bar"})
+  },
+  hello4:()=>{
+    return "4"
   }
+
 },
   // Mutation: {
   
@@ -41,6 +48,7 @@ const server = new ApolloServer({
      hello:String!
      hello2:String
      hello3:[String]!
+     hello4:Int   
     }
     `,
     resolvers,
