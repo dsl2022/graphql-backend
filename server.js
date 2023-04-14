@@ -22,33 +22,42 @@ const resolvers = {
     customers:()=>{
     return customers
   },
-  customer:(_,query)=>{
-    console.log(query)
+  customer:(_,{id})=>{
+  //  const result = 
+   return customers.find(customer=>customer.id===id) 
+    
+  //  if(result)return result;
+  //   else return {isExisted:false}
   }
 },
-  // Mutation: {
+  Mutation: {
   
-  //   addCustomer: () => {      
-  //   },
-  //   updateCustomer: () => {      
-  //   },
-  //   deleteCustomer: () => {      
-  //   },
-  // },
+    addCustomer: () => {    
+        
+    },
+    // updateCustomer: () => {      
+    // },
+    // deleteCustomer: () => {      
+    // },
+  },
 };
 
 // Create a new Apollo server instance with our schema and resolvers
 const server = new ApolloServer({
     typeDefs: gql`
     type Customer{
-      id:ID!
-      name:String!
-      phone:String!
-      email:String!
+      id:ID
+      name:String
+      phone:String
+      email:String
+      isExisted:Boolean
     }
     type Query {    
      customers:[Customer]!
-     customer(id:ID!):Customer!  
+     customer(id:ID!):Customer 
+    }
+    type Mutation {
+      addCustomer(name:String!,email:String!,phone:String! ):Customer
     }
     `,
     resolvers,
