@@ -19,16 +19,9 @@ const customers = [
 // Define the resolvers for our GraphQL server
 const resolvers = {
   Query: {  
-    hello:()=>{
-    return 'hello world!'
-  },
-  hello2:()=>{
-    return JSON.stringify({foo:"bar"})
-  },
-  hello4:()=>{
-    return "4"
+    customers:()=>{
+    return customers
   }
-
 },
   // Mutation: {
   
@@ -44,11 +37,14 @@ const resolvers = {
 // Create a new Apollo server instance with our schema and resolvers
 const server = new ApolloServer({
     typeDefs: gql`
-    type Query {
-     hello:String!
-     hello2:String
-     hello3:[String]!
-     hello4:Int   
+    type Customer{
+      id:ID!
+      name:String!
+      phone:String!
+      email:String!
+    }
+    type Query {    
+     customers:[Customer]!     
     }
     `,
     resolvers,
